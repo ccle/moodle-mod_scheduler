@@ -22,7 +22,10 @@ echo $output->teacherview_tabs($scheduler, $taburl, 'datelist');
 if (has_capability('mod/scheduler:canseeotherteachersbooking', $context)) {
     $teacherid = optional_param('teacherid', $USER->id, PARAM_INT);
     $tutor =  $DB->get_record('user', array('id' => $teacherid));
-    $teachers = scheduler_get_attendants ($cm->id);
+    // START UCLA MOD: CCLE-5832 - Handle drops correctly
+    //$teachers = scheduler_get_attendants ($cm->id);
+    $teachers = $scheduler->get_available_teachers();
+    // END UCLA MOD: CCLE-5832
 
     $teachermenu = array();
     foreach($teachers as $teacher){

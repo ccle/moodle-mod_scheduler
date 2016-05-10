@@ -151,7 +151,10 @@ if ($action == 'addslot') {
     $actionurl = new moodle_url('/mod/scheduler/view.php', array('what' => 'addslot', 'subpage' => $subpage, 'id' => $cm->id));
     $returnurl = new moodle_url('/mod/scheduler/view.php', array('what' => 'view', 'subpage' => $subpage, 'id' => $cm->id));
 
-    if (!scheduler_has_teachers($context)) {
+    // START UCLA MOD: CCLE-5832 - Handle drops correctly
+    //if (!scheduler_has_teachers($context)) {
+    if (!$scheduler->has_available_teachers()) {
+    // END UCLA MOD: CCLE-5832
         print_error('needteachers', 'scheduler', $returnurl);
     }
 
@@ -205,7 +208,10 @@ if ($action == 'addsession') {
     $returnurl = new moodle_url('/mod/scheduler/view.php',
                     array('what' => 'view', 'id' => $cm->id, 'subpage' => $subpage));
 
-    if (!scheduler_has_teachers($context)) {
+    // START UCLA MOD: CCLE-5832 - Handle drops correctly
+    //if (!scheduler_has_teachers($context)) {
+    if (!$scheduler->has_available_teachers()) {
+    // END UCLA MOD: CCLE-5832
         print_error('needteachers', 'scheduler', $returnurl);
     }
 

@@ -39,7 +39,10 @@ if ($action == 'savechoice') {
 
     $requiredcapacity = 1;
     if ($appointgroup) {
-        $groupmembers = groups_get_members($appointgroup);
+        // START UCLA MOD: CCLE-5832 - Handle drops correctly
+        //$groupmembers = groups_get_members($appointgroup);
+        $groupmembers = $scheduler->get_available_students($appointgroup);
+        // END UCLA MOD: CCLE-5832
         $requiredcapacity = count($groupmembers);
     }
 

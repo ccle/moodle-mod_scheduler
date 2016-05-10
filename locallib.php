@@ -23,6 +23,8 @@ require_once(dirname(__FILE__).'/model/scheduler_appointment.php');
  * @param int $cmid the course module
  * @return array of moodle user records
  */
+// START UCLA MOD: CCLE-5832 - Handle drops correctly
+/*
 function scheduler_get_attendants($cmid){
     $context = context_module::instance($cmid);
     $attendants = get_users_by_capability ($context, 'mod/scheduler:attend',
@@ -30,6 +32,8 @@ function scheduler_get_attendants($cmid){
         '', '', '', '', false, false, false);
     return $attendants;
 }
+*/
+// END UCLA MOD: CCLE-5832
 
 /**
  * Returns an array of slots that would overlap with this one.
@@ -359,9 +363,13 @@ function scheduler_print_user($user, $course, $messageselect=false, $return=fals
 }
 
 
+// START UCLA MOD: CCLE-5832 - Handle drops correctly
+/*
 function scheduler_has_teachers($context) {
     $teachers = get_users_by_capability ($context, 'mod/scheduler:attend', 'u.id');
     return count($teachers) > 0;
 }
+*/
+// END UCLA MOD: CCLE-5832
 
 

@@ -58,7 +58,10 @@ abstract class scheduler_slotform_base extends moodleform {
         // Choose the teacher (if allowed)
         if (has_capability('mod/scheduler:canscheduletootherteachers', $this->context)) {
             $teachername = s($this->scheduler->get_teacher_name());
-            $teachers = scheduler_get_attendants($this->cm->id);
+            // START UCLA MOD: CCLE-5832 - Handle drops correctly
+            //$teachers = scheduler_get_attendants($this->cm->id);
+            $teachers = $this->scheduler->get_available_teachers();
+            // END UCLA MOD: CCLE-5832
             $teachersmenu = array();
             if ($teachers) {
                 foreach ($teachers as $teacher) {
@@ -159,7 +162,10 @@ class scheduler_editslot_form extends scheduler_slotform_base {
         $repeatarray[] = $mform->createElement('header', 'appointhead', get_string('appointmentno', 'scheduler', '{no}'));
 
         // Choose student
-        $students = $this->scheduler->get_possible_attendees($this->usergroups);
+        // START UCLA MOD: CCLE-5832 - Handle drops correctly
+        //$students = $this->scheduler->get_possible_attendees($this->usergroups);
+        $students = $this->scheduler->get_available_students($this->usergroups);
+        // END UCLA MOD: CCLE-5832
         $studentsmenu = array('0' => get_string('choosedots'));
         if ($students) {
             foreach ($students as $astudent) {

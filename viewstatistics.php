@@ -29,7 +29,10 @@ echo $output->teacherview_tabs($scheduler, $taburl, $subpage);
 
 //display correct type of statistics by request
 
-$attendees = $scheduler->get_possible_attendees($usergroups);
+// START UCLA MOD: CCLE-5832 - Handle drops correctly
+//$attendees = $scheduler->get_possible_attendees($usergroups);
+$attendees = $scheduler->get_available_students($usergroups);
+// END UCLA MOD: CCLE-5832
 
 switch ($subpage) {
     case 'overall':
