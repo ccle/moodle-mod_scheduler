@@ -525,7 +525,10 @@ class scheduler_addsession_form extends scheduler_slotform_base {
         $starttime = $data['starthour'] * 60 + $data['startminute'];
         $endtime = $data['endhour'] * 60 + $data['endminute'];
         if ($starttime > $endtime) {
-            $errors['endtime'] = get_string('negativerange', 'scheduler');
+            // SSC-3848 - Scheduler: incorrect time doesn't give error.
+            //$errors['endtime'] = get_string('negativerange', 'scheduler');
+            $errors['timerange'] = get_string('negativetimerange', 'scheduler');
+            // END UCLA MOD.
         }
 
         // First slot is in the past.

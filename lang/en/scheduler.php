@@ -533,3 +533,7 @@ $string['email_invite_html'] = '<p>Please choose a time slot for an appointment 
 
 $string['email_invitereminder_subject'] = 'Reminder: {$a->module}';
 $string['email_invitereminder_html'] = '<p>This is just a reminder that you have not yet set up your appointment. Please choose a time slot as soon as possible at:</p><p>{$a->scheduler_url}</p>';
+
+// SSC-3848 - Scheduler: incorrect time doesn't give error.
+$string['negativetimerange'] = "Time range is negative. This can't be.";
+// END UCLA MOD.
